@@ -187,12 +187,10 @@ public final class DroidAPIExtended {
         id.setParentId(ID_GENERATOR.getAndIncrement());
         id.setNodeId(ID_GENERATOR.getAndIncrement());
 
-        final InputStreamIdentificationRequest request = new InputStreamIdentificationRequest(metaData, id);
-        try {
+
+        try (InputStreamIdentificationRequest request = new InputStreamIdentificationRequest(metaData, id)){
         	request.open(input);
         	return submit(request);
-        } finally {
-            request.removeTempDir();
         }
     }
     
